@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="/stylesheets/results.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1; /* This makes the content area take up the remaining space */
+        }
+
+        footer {
+            background-color: rgb(15, 13, 13);
+            color: orange; 
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Include Navigation Code -->
+    <%- include('include/nav.ejs') %>
+    
+    <div class="box">
+        <h1>Quiz Results</h1>
+        <p>Your Score: <%= score %> / <%= total %></p>
+        <div class="qanda">
+            <ol>
+                <% userAnswers.forEach((answer, index) => { %>
+                    <li class="qa-pair">
+                        <p><strong>Your Answer:</strong> <%- answer %></p>
+                        <p><strong>Correct Answer:</strong> <%- correctAnswers[index] %></p>
+                        <% if (answer === correctAnswers[index]) { %>
+                            <p style="color: green;">Correct</p>
+                        <% } else { %>
+                            <p style="color: red;">Incorrect</p>
+                        <% } %>
+                    </li>
+                <% }) %>
+            </ol>
+        </div>
+    </div>
+    
+    
+    <div class="try">
+        <a href="/difficulty">Create New Quiz</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="text-center ">
+        <div class="text-center">
+            © 2024 Copyright:
+            <a class="text-light" href="/landing">Greek Mythology</a>
+        </div>
+    </footer>
+    
+</body>
+</html>
